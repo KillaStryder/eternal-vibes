@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <%- include ../../Partials/AboveFold.ejs %>
+</head >
+<body class="grey lighten-3" >
+<main >
+    <div class="row" >
+        <%- include ./partials/nav.ejs %>
+        <div class="center header card-content rectangle" style="width:100% ;height:200px;
+            background: url('images/background/background4.jpg'); background-size: cover;" >
+            <div class="center col s4 offset-s5 " style="margin-top: 10%" >
+                <a href="#" data-activates="slide-out" class=" hide-on-large-only
+                                right-aligned large btn-floating button-collapse"
+                   style="margin-top: 2%">
+                    <i class="material-icons">menu</i>
+                </a>
+
+                <h2 class="orange-text" align="center" style="margin-top: 25%;" >Available Skills</h2 >
+
+                <ul class="collection" >
+                    <% skills.forEach(function(skill)
+                    { %>
+                    <li class="collection-item dismissable" >
+                        <div ><%= skill.name %><a onclick="deleteSkill(<%= skill.id %>)" class="secondary-content" ><i
+                                        class="material-icons" >clear</i ></a ></div >
+                    </li >
+                    <% }) %>
+                </ul >
+
+            </div >
+        </div >
+
+        <div class="fixed-action-btn" >
+            <a id="add" data-target="addskill"
+               class="btn-floating modal-trigger btn-large waves-effect waves-light red" >
+                <i class="material-icons" >add</i >
+            </a >
+        </div >
+
+        <div id="addskill" class="modal bottom-sheet" >
+            <div class="modal-content center" >
+                <h2 class="brown-text modal-ux-header" >Add Skill</h2 >
+                <h5 >Add a new skill for users</h5 >
+                <input type="text" id="add_skill" placeholder="Enter New Skill" />
+                <br />
+                <div class="modal-footer" >
+                    <a id="submit_skill" onclick="addSkill()"
+                       class="modal-action modal-close waves-effect waves-light btn-flat brown-text" >Submit</a >
+                    <a class="modal-action modal-close waves-effect waves-light btn-flat red-text left" >Cancel</a >
+                </div >
+            </div >
+        </div >
+    </div>
+</main >
+</body >
+<script >
+
+  function deleteSkill (skillId) {
+
+    $.post("https://eternalvibes.me/deleteSkill",
+      {
+        skillId: skillId
+      },
+      function () {
+        location.reload();
+        Materialize.toast('Banned User', 500);
+      });
+  }
+
+  function addSkill () {
+    var skillName =$('#add_skill').val()
+    $.post("https://eternalvibes.me/addSkill",
+      {
+        skillName: skillName
+      },
+      function (data) {
+        console.log("Data: " + data);
+        location.reload();
+        Materialize.toast('Added skill', 500);
+      });
+  }
+
+  $(document).ready(function () {
+    $('.modal').modal()
+    if (info.admin === 0) {
+      history.back()
+    }
+  })
+
+  $('#add').click(function () {
+    $('#addskill').modal('open')
+  })
+
+
+  Materialize.showStaggeredList('#sList')
+
+</script >
+
+
+
+</html >

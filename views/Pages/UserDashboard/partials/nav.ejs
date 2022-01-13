@@ -1,0 +1,73 @@
+<ul id="slide-out" acti class="side-nav right fixed ">
+    <li >
+        <div class="userView" >
+            <div class="background" >
+                <img src="images/background/background1.jpg" >
+            </div >
+            <a href="/profile" >
+                <img id="userImg" class="circle materialboxed" src="" >
+            </a >
+            <a href="" >
+                <span id="userName" class="white-text" >Eternal Vibes</span >
+            </a >
+            <br>
+        </div >
+    </li >
+
+    <li >
+        <a href="/dashboard" class="tooltipped brown-text text-darken-5 "
+           data-position="bottom" data-delay="50" data-tooltip="Home" >
+            <i class="material-icons red-text" >home</i > Home
+        </a >
+    </li >
+    <li >
+        <a brown-text text-darken-5 href="/profile"  class="tooltipped brown-text text-darken-5" data-position="bottom"
+           data-delay="50" data-tooltip="Profile" >
+            <i class="left material-icons red-text" >assignment_ind</i > Profile
+        </a>
+    </li >
+    <li >
+        <div class="divider" ></div >
+    </li >
+    <li ><a class="brown-text text-darken-5" href="/logout" >
+            <i class="material-icons right" >power_settings_new</i >Logout</a >
+    </li >
+
+</ul >
+
+
+<script>
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    var userID;
+    function setUserID(id)
+    {
+        userID = id;
+        setProfileImg();
+    }
+
+    $(document).ready(function()
+    {
+        $(".dropdown-button").dropdown();
+
+    });
+    function getEmail(email)
+    {
+
+    }
+    function myFunction() {
+        if (window.scrollY >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+
+    function setProfileImg()
+    {
+        var image = "images/profilePics/" + userID + ".png";
+        $('#userImg').attr('src', image );
+    }
+
+</script>

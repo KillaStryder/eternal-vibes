@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <%- include ../../Partials/AboveFold.ejs %>
+</head >
+<body >
+
+<%- include ./partials/nav.ejs %>
+<main >
+    <div id="index-banner" class="parallax-container" >
+        <div class="section no-pad-bot" >
+            <div class="container" >
+                <br ><br >
+                <h1 class="header center orange-text text-darken-2" >We Connect Artists</h1 >
+                <div class="row center" >
+                    <a href="/login" class="btn btn-default" ><span class="fa fa-user" ></span > Login</a >
+                    <a href="/signup" class="btn btn-default" ><span class="fa fa-user" ></span > Signup</a >
+                </div >
+                <br ><br >
+            </div >
+        </div >
+        <div class="parallax" ><img src="images/background/background1.jpg" alt="Unsplashed background img 1" ></div >
+    </div >
+
+    <div class="container" >
+        <div class="section" >
+            <div id='first' class="row" >
+                <div class="col s12 m4" >
+                    <div class="icon-block" >
+                        <h2 class="center brown-text" ><i class="material-icons" >language</i ></h2 >
+                        <h5 class="center brown-text" >Find Artists Near You</h5 >
+
+                        <p class="light brown-text" >We allow you to find hungry artists around you that are ready to
+                            collaborate. Connect with them and start networking.</p >
+                    </div >
+                </div >
+
+                <div class="col s12 m4" >
+                    <div class="icon-block" >
+                        <h2 class="center brown-text" ><i class="material-icons" >fast_forward</i ></h2 >
+                        <h5 class="center brown-text" >Fast Forward</h5 >
+
+                        <p class="light brown-text" >Our alogorthims only find artists that you are interested in
+                            viewing,
+                            skip to the next artists to find your perfect feature.</p >
+                    </div >
+                </div >
+
+                <div class="col s12 m4" >
+                    <div class="icon-block" >
+                        <h2 class="center brown-text" ><i class="material-icons" >settings_input_composite</i ></h2 >
+                        <h5 class="center brown-text" >Listen</h5 >
+
+                        <p class="light brown-text" >We use soundcloud so you can quickly view and listen to music from
+                            artists around you.</p >
+                    </div >
+                </div >
+            </div >
+
+        </div >
+    </div >
+
+    <div class="parallax-container valign-wrapper" >
+        <div class="section no-pad-bot" >
+            <div class="container" >
+                <div id='second' class="row center" >
+                    <h5 class="header col s12 orange-text" >The future is now, start networking.</h5 >
+                </div >
+            </div >
+        </div >
+        <div class="parallax" ><img src="images/background/background2.jpg" alt="Unsplashed background img 2" ></div >
+    </div >
+
+    <div class="container" >
+        <div class="section" >
+
+            <div class="row" >
+                <div id='third' class="col s12 center brown-text" >
+                    <h3 ><i class="mdi-content-send brown-text" ></i ></h3 >
+                    <h4 >Contact Us</h4 >
+                    <p class="left-align light" >We are a bunch of university students that low new technologies.
+                        Connecting
+                        people is something we love doing, so contact us and get us to connect you with your
+                        future.</p >
+                </div >
+            </div >
+
+        </div >
+    </div >
+
+    <div class="parallax-container valign-wrapper" >
+        <div class="section no-pad-bot" >
+            <div class="container" >
+                <div id='forth' class="row center" >
+                    <h5 class="header col s12 orange-text" >Time for you to meet your future</h5 >
+                </div >
+            </div >
+        </div >
+        <div class="parallax" ><img src="images/background/background3.jpg" alt="Unsplashed background img 3" ></div >
+    </div >
+</main >
+<%- include ../../Partials/footer.ejs %>
+<script >
+  var options = [
+    {
+      selector: '#index-banner', offset: 0, callback: function (el) {
+      Materialize.toast('Scroll Down for more!', 2000, 'rounded')
+    }
+    },
+    {
+      selector: '#first', offset: 300, callback: function (el) {
+      Materialize.toast('Keep going!', 2000, 'rounded')
+    }
+    },
+    {
+      selector: '#second', offset: 0, callback: function (el) {
+      Materialize.toast('Half way!', 2000, 'rounded')
+    }
+    },
+    {
+      selector: '#third', offset: 0, callback: function (el) {
+      Materialize.toast('Almost there!', 2000, 'rounded')
+    }
+    },
+    {
+      selector: '#Footer', offset: 0, callback: function (el) {
+      Materialize.toast('Thanks for your time :-)', 2000, 'rounded')
+    }
+    }
+  ];
+  Materialize.scrollFire(options);
+</script >
+
+</body >
+</html >

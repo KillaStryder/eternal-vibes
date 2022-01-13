@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <%- include ../../Partials/AboveFold.ejs %>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js" ></script >
+</head >
+<body class="grey lighten-3" >
+<main >
+    <div id="reportPage" class="row" >
+        <%- include ./partials/nav.ejs %>
+        <div class="center header card-content rectangle" style="width:100% ;height:200px;
+            background: url('images/background/background4.jpg'); background-size: cover;" >
+            <div class="center-align col s8 offset-s3" style="margin-top: 10%" >
+                <a href="#" data-activates="slide-out" class=" hide-on-large-only
+                                right-aligned large btn-floating button-collapse"
+                   style="margin-top: 2%">
+                    <i class="material-icons">menu</i>
+                </a>
+                <div class="" >
+                    <h2 class="center-align orange-text" style='width:100%;margin-top: 15%;' >Overall</h2 >
+                </div >
+
+                <ul id="staggered-test" style="margin-top: 5%" >
+                    <li class="" style="transform: translateX(0px); opacity: 0; " >
+                        <div class="row" >
+                            <div class="col s6 container" >
+                                <div class="card white darken-4 black-text" >
+                                    <div class="card-content" >
+                                        <h1 class="center-align" >Spread of genres</h1 >
+                                        <canvas id="myChart" width="200" height="200" ></canvas >
+                                    </div >
+                                </div >
+                            </div >
+                            <div class="col s6 container" >
+                                <div class="card white darken-4 black-text" >
+                                    <div class="card-content" >
+                                        <h1 class="center-align" >Location spread</h1 >
+                                        <canvas id="myChartLocationSpread" width="400" height="400" ></canvas >
+                                    </div >
+                                </div >
+                            </div >
+                        </div >
+                    </li >
+                    <li class="" style="transform: translateX(0px); opacity: 0; " >
+                        <div class="row" >
+                            <div class="col s1 container" >
+                            </div >
+                            <div class="col s10 container" >
+                                <div class="card white darken-4 black-text" >
+                                    <div class="card-content" >
+                                        <h1 class="center-align" >Spread of skills</h1 >
+                                        <canvas id="myChartSkills" width="400" height="400" ></canvas >
+                                    </div >
+                                </div >
+                            </div >
+                            <div class="col s1 container" >
+                            </div >
+                        </div >
+                    </li >
+                    <div class="" >
+                        <h2 class="center-align orange-text" style='width:100%;' >Monthly</h2 >
+                    </div >
+                    <li class="" style="transform: translateX(0px); opacity: 0; " >
+                        <div class="chip" >
+                            <a onclick="dothis(4)" style="cursor: pointer" >
+                                3 months ago
+                            </a >
+                        </div >
+
+                        <div class="chip" >
+                            <a onclick="dothis(3)" style="cursor: pointer" >
+                                2 months ago
+                            </a >
+                        </div >
+                        <div class="chip" >
+                            <a onclick="dothis(2)" style="cursor: pointer" >
+                                1 month ago
+                            </a >
+                        </div >
+                        <div class="chip" >
+                            <a onclick="dothis(1)" style="cursor: pointer" >
+                                This month
+                            </a >
+                        </div >
+                        <div class="row" >
+
+                            <div class="col s4 container" >
+                                <div class="card white darken-4 black-text" >
+                                    <div class="card-content" >
+                                        <h1 class="center-align" >Signups</h1 >
+                                        <canvas id="myChartSignup" width="400" height="400" ></canvas >
+                                    </div >
+                                </div >
+                            </div >
+                            <div class="col s4 container" >
+                                <div class="card white darken-4 black-text" >
+                                    <div class="card-content" >
+                                        <h1 class="center-align" >Posts</h1 >
+                                        <canvas id="myChartPostsPerDay" width="400" height="400" ></canvas >
+                                    </div >
+                                </div >
+                            </div >
+                            <div class="col s4 container" >
+                                <div class="card white darken-4 black-text" >
+                                    <div class="card-content" >
+                                        <h1 class="center-align" >Events</h1 >
+                                        <canvas id="myChartEventsPerDay" width="400" height="400" ></canvas >
+                                    </div >
+                                </div >
+                            </div >
+                        </div >
+                    </li >
+                    <div class="" >
+                        <h2 class="center-align orange-text" style='width:100%;' >Daily</h2 >
+                    </div >
+                    <div class="row" >
+                        <div class="col s4 offset-s4" >
+                            <div >Pick the day</div >
+                            <input type="text" class="datepicker" >
+                        </div >
+                    </div >
+                    <li class="" style="transform: translateX(0px); opacity: 0; " >
+                        <ul class="collection with-header" >
+                            <li class="collection-header" >
+                                <h4 ><h1 id="signups" class="left-align" >Signups: <%= Reports.users24.count %></h1 >
+
+                                </h4 >
+                            </li >
+                            <li class="collection-header" >
+                                <h4 ><h1 id="upcomingEvents" class="left-align" >Planned
+                                        events: <%= Reports.events24.count %></h1 >
+
+                                </h4 >
+                            </li >
+                            <li class="collection-header" >
+                                <h4 ><h1 id="finishedEvents" class="left-align" >Finished
+                                        events: <%= Reports.events24.count %></h1 >
+
+                                </h4 >
+                            </li >
+                            <li class="collection-header" >
+                                <h4 ><h1 id="eventsAverageRate" class="left-align" >Events average
+                                        rate: <%= Reports.events24.count %></h1 >
+
+                                </h4 >
+                            </li >
+                            <li class="collection-header" >
+                                <h4 ><h1 id="followers" class="left-align" >
+                                        Followers: <%= Reports.events24.count %></h1 >
+
+                                </h4 >
+                            </li >
+                            <li class="collection-header" >
+                                <h4 ><h1 id="friends" class="left-align" >Friends: <%= Reports.events24.count %></h1 >
+
+                                </h4 >
+                            </li >
+                        </ul >
+                    </li >
+                </ul >
+                <button type="button" id="download-pdf" >
+                    Download PDF
+                </button >
+            </div >
+
+        </div >
+</main >
+<script >
+
+  var ctx2 = document.getElementById('myChartSignup').getContext('2d')
+  var myChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Week4', 'Week3', 'Week2', 'Week1',
+      ],
+      datasets: [
+        {
+          label: '# of users per week',
+          data: [<%= Reports.usersWeek4 %>,<%= Reports.usersWeek3 %>,<%= Reports.usersWeek2 %>,<%= Reports.usersWeek1 %>],
+          borderWidth: 1,
+          backgroundColor: [
+            hexToRGB('#EF9A9A', 0.7),
+            hexToRGB('#DC3912', 0.7),
+            hexToRGB('#FF9900', 0.7),
+            hexToRGB('#109618', 0.7),
+          ],
+          borderColor: [
+            hexToRGB('#EF9A9A', 0.7),
+            hexToRGB('#DC3912', 0.7),
+            hexToRGB('#FF9900', 0.7),
+            hexToRGB('#109618', 0.7),
+          ],
+        }],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          }],
+      },
+    },
+  })
+
+  var ctx4 = document.getElementById('myChartPostsPerDay').getContext('2d')
+  var myChart4 = new Chart(ctx4, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Week4', 'Week3', 'Week2', 'Week1',
+      ],
+      datasets: [
+        {
+          label: '# of posts per week',
+          data: [<%= Reports.postsWeek4 %>,<%= Reports.postsWeek3 %>,<%= Reports.postsWeek2 %>,<%= Reports.postsWeek1 %>],
+          borderWidth: 1,
+          backgroundColor: [
+            hexToRGB('#EF9A9A', 0.7),
+            hexToRGB('#DC3912', 0.7),
+            hexToRGB('#FF9900', 0.7),
+            hexToRGB('#109618', 0.7),
+          ],
+          borderColor: [
+            hexToRGB('#EF9A9A', 0.7),
+            hexToRGB('#DC3912', 0.7),
+            hexToRGB('#FF9900', 0.7),
+            hexToRGB('#109618', 0.7),
+          ],
+        }],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          }],
+      },
+    },
+  })
+
+  var ctx5 = document.getElementById('myChartEventsPerDay').getContext('2d')
+  var myChart5 = new Chart(ctx5, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Week4', 'Week3', 'Week2', 'Week1',
+      ],
+      datasets: [
+        {
+          label: '# of events created per week',
+          data: [<%= Reports.eventsWeek4 %>,<%= Reports.eventsWeek3 %>,<%= Reports.eventsWeek2 %>,<%= Reports.eventsWeek1 %>],
+          borderWidth: 1,
+          backgroundColor: [
+            hexToRGB('#EF9A9A', 0.7),
+            hexToRGB('#DC3912', 0.7),
+            hexToRGB('#FF9900', 0.7),
+            hexToRGB('#109618', 0.7),
+          ],
+          borderColor: [
+            hexToRGB('#EF9A9A', 0.7),
+            hexToRGB('#DC3912', 0.7),
+            hexToRGB('#FF9900', 0.7),
+            hexToRGB('#109618', 0.7),
+          ],
+        }],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          }],
+      },
+    },
+  })
+
+  function dothis (id) {
+    var url = "https://eternalvibes.me/monthly/" + id
+    $.get(url, function (data) {
+
+      myChart2.data.datasets[0].data = [data.usersWeek1, data.usersWeek2, data.usersWeek3, data.usersWeek4];
+      myChart4.data.datasets[0].data = [data.postsWeek1, data.postsWeek2, data.postsWeek3, data.postsWeek4];
+      myChart5.data.datasets[0].data = [data.eventsWeek1, data.eventsWeek2, data.eventsWeek3, data.eventsWeek4];
+
+      myChart5.update();
+      myChart4.update();
+      myChart2.update();
+    }).done(function () {
+
+    }).fail(function (response) {
+      console.log('Error: ' + response.responseText);
+    });
+  }
+
+  dothis(1);
+
+  var ctx = document.getElementById('myChart').getContext('2d')
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [<% Reports.genres.forEach(function (genre) { %>
+        '<%= genre.name %>',
+          <% }) %>],
+      datasets: [
+        {
+          label: '# of users',
+          data: [<% Reports.genres.forEach(function (genre) { %>
+              <%= genre.count %>,
+              <% }) %>],
+          borderWidth: 1,
+          backgroundColor: [
+              <% Reports.genres.forEach(function (genre) { %>
+            hexToRGB('#' + intToRGB(hashCode('<%= genre.name %>')), 0.7),
+              <% }) %>
+          ],
+          borderColor: [
+              <% Reports.genres.forEach(function (genre) { %>
+            hexToRGB('#' + intToRGB(hashCode('<%= genre.name %>')), 0.7),
+              <% }) %>
+          ],
+
+        }],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          }],
+      },
+    },
+  })
+
+  <% function abbreviate (str1) {
+      var matches = str1.match(/\b(\w)/g);
+      return (matches.join(''));
+
+  } %>
+  var ctx6 = document.getElementById('myChartLocationSpread').getContext('2d')
+  var myChart6 = new Chart(ctx6, {
+    type: 'horizontalBar',
+    data: {
+      labels: [<% Reports.cities.forEach(function (city) { %>
+          <% var name = city.name;
+              console.log(city)
+              if (name !== null) {
+
+                  name = name.substring(0, name.indexOf(",") + 2) + abbreviate(name.substring(name.indexOf(",")))
+                  console.log(name)
+              }else{
+                name="Not Set"
+              }
+          %>
+        '<%= name %>',
+          <% }) %>],
+      datasets: [
+        {
+          label: '# of users from location',
+          data: [<% Reports.cities.forEach(function (city) { %>
+              <%= city.count %>,
+              <% }) %>],
+          borderWidth: 1,
+          backgroundColor: [
+              <% Reports.cities.forEach(function (city) { %>
+            hexToRGB('#' + intToRGB(hashCode('<%= city.name %>')), 0.7),
+              <% }) %>
+          ],
+          borderColor: [
+              <% Reports.cities.forEach(function (city) { %>
+            hexToRGB('#' + intToRGB(hashCode('<%= city.name %>')), 0.7),
+              <% }) %>
+          ],
+        }],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          }],
+      },
+    },
+  })
+
+  var ctx7 = document.getElementById('myChartSkills').getContext('2d')
+  var myChart7 = new Chart(ctx7, {
+    type: 'horizontalBar',
+    data: {
+      labels: [<% Reports.skills.forEach(function (skill) { %>
+        '<%= skill.name %>',
+          <% }) %>],
+      datasets: [
+        {
+          label: '# of users with the skill',
+          data: [<% Reports.skills.forEach(function (skill) { %>
+              <%= skill.count %>,
+              <% }) %>],
+          borderWidth: 1,
+          backgroundColor: [
+              <% Reports.skills.forEach(function (skill) { %>
+            hexToRGB('#' + intToRGB(hashCode('<%= skill.name %>')), 0.7),
+              <% }) %>
+          ],
+          borderColor: [
+              <% Reports.skills.forEach(function (skill) { %>
+            hexToRGB('#' + intToRGB(hashCode('<%= skill.name %>')), 0.7),
+              <% }) %>
+          ],
+        }],
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          }],
+      },
+    },
+  })
+
+  function hashCode (str) { // java String#hashCode
+    var hash = 0
+    for (var i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash)
+    }
+    return hash
+  }
+
+  function intToRGB (i) {
+    var c = (i & 0x00FFFFFF).toString(16).toUpperCase()
+
+    return '00000'.substring(0, 6 - c.length) + c
+  }
+
+  function hexToRGB (hex, alpha) {
+    var r = parseInt(hex.slice(1, 3), 16),
+      g = parseInt(hex.slice(3, 5), 16),
+      b = parseInt(hex.slice(5, 7), 16)
+
+    if (alpha) {
+      return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')'
+    } else {
+      return 'rgb(' + r + ', ' + g + ', ' + b + ')'
+    }
+  }
+
+  $('.datepicker').on('change', function () {
+    var t = $('.datepicker').val()
+    var mydate = new Date(t);
+    var nowDaye = new Date();
+    var numberOfDays = Math.ceil((nowDaye - mydate) / 8.64e7);
+    var url = "https://eternalvibes.me/daily/" + numberOfDays
+    $.get(url, function (data) {
+
+      $('#signups').html("Signups: " + data.signups)
+      $('#upcomingEvents').html("Upcoming Events: " + data.upcomingEvents)
+      $('#finishedEvents').html("Finished Events: " + data.finishedEvents)
+      if (data.eventsAverageRate === null) {
+        $('#eventsAverageRate').html("Events Average Ratings: " + 0)
+      } else {
+        $('#eventsAverageRate').html("Events Average Ratings: " + data.eventsAverageRate)
+      }
+
+      $('#followers').html("Followers: " + data.followers)
+      $('#friends').html("Friends: " + data.friends)
+    }).done(function () {
+
+    }).fail(function (response) {
+      console.log('Error: ' + response.responseText);
+    });
+  });
+  var $input = $('.datepicker').pickadate({
+    selectMonths: true,
+    selectYears: 1,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false,
+    max: new Date()
+  });
+  var picker = $input.pickadate('picker')
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth();
+  var yyyy = today.getFullYear();
+  picker.set('select', [yyyy, mm, dd])
+
+  document.getElementById('download-pdf').addEventListener("click", downloadPDF);
+
+  function downloadPDF () {
+
+    var canvas = document.querySelector('#myChartEventsPerDay');
+    var canvasImg = canvas.toDataURL("image/PNG");
+
+    var canvas2 = document.querySelector('#myChart');
+    var canvasImg2 = canvas2.toDataURL("image/PNG");
+
+    var canvas3 = document.querySelector('#myChartLocationSpread');
+    var canvasImg3 = canvas3.toDataURL("image/PNG");
+
+    var canvas4 = document.querySelector('#myChartSkills');
+    var canvasImg4 = canvas4.toDataURL("image/PNG");
+
+    var canvas5 = document.querySelector('#myChartSignup');
+    var canvasImg5 = canvas5.toDataURL("image/PNG");
+
+    var canvas6 = document.querySelector('#myChartPostsPerDay');
+    var canvasImg6 = canvas6.toDataURL("image/PNG");
+
+    var doc = new jsPDF();
+
+    doc.addImage(canvasImg, 'PNG', 10, 10, 100, 100,"a","FAST");
+    doc.addImage(canvasImg2, 'PNG', 10, 100, 100, 100,"ab","FAST");
+    doc.addImage(canvasImg3, 'PNG', 10, 200, 100, 100,"ac","FAST");
+    doc.addPage();
+    doc.addImage(canvasImg4, 'PNG', 10, 10, 100, 100,"ad","FAST");
+    doc.addImage(canvasImg5, 'PNG', 10, 100, 100, 100,"ae","FAST");
+    doc.addImage(canvasImg6, 'PNG', 10, 200, 100, 100,"fa","FAST");
+    doc.addPage();
+    doc.text(10, 10, $('#signups').text());
+    doc.text(10, 40, $('#upcomingEvents').text());
+    doc.text(10, 70, $('#finishedEvents').text());
+    doc.text(10, 100, $('#eventsAverageRate').text());
+    doc.text(10, 130, $('#followers').text());
+    doc.text(10, 160, $('#friends').text());
+    doc.save('canvas.pdf');
+  }
+</script >
+<script >
+  Materialize.showStaggeredList('#staggered-test')
+  $('.button-collapse').sideNav()
+
+</script >
+
+</body >
+</html >
